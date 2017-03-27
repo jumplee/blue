@@ -1,0 +1,26 @@
+{
+  "name": "blue",
+  "version": "0.0.1",
+  "description": "css frameowork with a mini core and plugins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumplee/blue.git"
+  },
+  "keywords": [
+    "css",
+    "bootstrap"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jumplee/blue/issues"
+  },
+  "homepage": "https://github.com/jumplee/blue#readme",
+  "devDependencies": {
+    "node-sass": "^4.5.1"
+  }
+}

@@ -1,0 +1,15 @@
+//@import "mixin/row";
+.row{
+  @include make-row;
+  @for $i from 1 through $columns {
+    .col-#{$i} {
+      float:left;
+      width:percentage($i/$columns);
+      box-sizing: border-box;
+    }
+  }
+}
+.container{
+@include make-container();
+}
+

@@ -1,0 +1,15 @@
+@mixin make-row(){
+  @include clearfix;
+  .col{
+    float:left;
+    box-sizing: border-box;
+  }
+}
+@mixin make-container(){
+  max-width: $max-width;
+  min-width: $min-width;
+  @include center-block;
+
+}
+
+
