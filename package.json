@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "node-sass --watch all.scss dist/blue.css"
+    "dev": "node-sass --watch all.scss dist/blue.css"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/jumplee/blue#readme",
   "devDependencies": {
+    "gulp": "^3.9.1",
     "node-sass": "^4.5.1"
   }
 }

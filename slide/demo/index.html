@@ -1,47 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_q676lw7ig3bit3xr.css">
     <script src="http://cdn.bootcss.com/vue/2.2.4/vue.js"></script>
+    <style>
+        .slide-image {
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
     <div id="app">
-       <Slides>
-            <div>
-                hello
-            </div>
+        <Slides>
+            <Slide v-for="(slide,index) in slides">
+                <h2>{{index}}. {{slide.title}}</h2>
+                <img class="slide-image" :src="slide.img" alt="">
+            </Slide>
+          
         </Slides>
+
     </div>
+    <script type="text/tempalte" id="slides_component">
 
+        <div class="slides">
+            <slot></slot>
+            <!--<div class="slide-item">
+            <h2>手工输入的一个页面</h2>
+            <img class="slide-image" src="./iphone7-gallery1.jpeg" alt="">
+        </div>-->
+           
+            <div class="slide-nav-left">
+                <i class="iconfont icon-arrow-left" @click="before()"></i>
+            </div>
+            <div class="slide-nav-right">
+                <i class="iconfont icon-arrow-right" @click="next()"></i>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="slide_component">
+        <div class="slide-item">
+            <slot></slot>
+        </div>
+    </script>
     <script>
-        var slidesComponent=new Vue({
-            template :`
-<div>
-<div class="slides">
-<slot></slot>
-</div>
-</div>
+        var Slide ={
+            name:'Slide',
+            template:document.getElementById('slide_component').innerHTML
+        }
+        var slidesComponent = {
+            template: document.getElementById('slides_component').innerHTML,
+            mounted: function () {
+                var children=this.$children
+                
+            },
+            methods: {
+                getActive: function (index) {
+                    // if (this.startAnim) {
 
-            `
-        })
+                    //     if (this.reverse) {
 
-        var app=new Vue({
-            el:'#app',
-            data:function(){
-                return {
-                    slides:[
+                    //     } else {
+                    //         if (index === this.activeIndex) {
+                    //             return ['active', 'slide-from-right']
+                    //         } else if (index === this.activeIndex - 1) {
+                    //             return ['slide-to-left']
+                    //         }
+                    //     }
+                    // } else {
+                    //     if (index === this.activeIndex) {
+                    //         return ['active']
+                    //     }
 
-                    ]
+                    // }
+                    if(index===this.activeIndex){
+                        return ['active']
+                    }
+                },
+                go: function (index) {
+                    if (index >= 0 && index < this.slides.length) {
+                        //如果是反向打开
+                        if (this.activeIndex > index) {
+                            this.reverse = true
+                        } else {
+                            this.reverse = false
+                        }
+                        this.activeIndex = index
+                        this.startAnim = true
+                    }
+                },
+                next: function () {
+                    this.go(this.activeIndex + 1)
+                },
+                before: function () {
+                    this.go(this.activeIndex - 1)
                 }
             },
-            components:{
-                Slides:slidesComponent
+            data: function () {
+                return {
+                    startAnim: false,
+                    reverse: false,
+                    activeIndex: 0
+                }
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            components: {
+                Slides: slidesComponent,
+                Slide:Slide
+            },
+            data: function(){
+                return {
+                                        slides: [{
+                            title: '测试内容',
+                            descr: '不可描述的内容',
+                            img: './iphone7-gallery1.jpeg'
+                        },
+                        {
+                            title: '测试内容2',
+                            descr: '不可描述的内容',
+                            img: './iphone7-gallery2.jpeg'
+                        },
+                        {
+                            title: '测试内容3',
+                            descr: '不可描述的内容',
+                            img: './iphone7-gallery3.jpeg'
+                        },
+                        {
+                            title: '测试内容3',
+                            descr: '不可描述的内容'
+                        }
+                    ]
+                }
             }
         })
     </script>
 </body>
+
 </html>
