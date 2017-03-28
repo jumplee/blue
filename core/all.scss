@@ -1,5 +1,7 @@
 $columns :12;
 $min-width:960px;
 $max-width:1140px;
-@import "../mixin/all";
+@import "./mixin/clearfix";
+@import "./mixin/grid";
+@import "./mixin/center-block";
 @import "grid";

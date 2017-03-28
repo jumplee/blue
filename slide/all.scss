@@ -1,0 +1,8 @@
+.slides{
+    position: relative;
+    .slide-item{
+        position: absolute;
+        width:100%;
+        transform: translate(100%)
+    }
+}
