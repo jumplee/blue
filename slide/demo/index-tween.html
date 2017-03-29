@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="demo.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_q676lw7ig3bit3xr.css">
     <script src="http://cdn.bootcss.com/vue/2.2.4/vue.js"></script>
-    <!--<script src="http://cdn.bootcss.com/tween.js/r14/Tween.js"></script>-->
+    <script src="http://cdn.bootcss.com/tween.js/r14/Tween.js"></script>
     <style>
         .slide-image {
             width: 100%;
@@ -31,7 +31,6 @@
                 <div class="descr"> 
                     <h2>{{index}}. {{slide.title}}</h2>
                 </div>
-                
                 <img class="slide-image" :src="slide.img" alt="">
             </Slide>
         </Slides>
@@ -48,11 +47,11 @@
         </div>
     </script>
     <script type="text/template" id="slide_component">
-        <div class="slide-item" :class="[actived?'actived':'']">
+        <div class="slide-item" :style="getStyle()" :class="[actived?'actived':'']">
             <slot></slot>
         </div>
     </script>
-    <script src="../slide.js"></script>
+    <script src="../slide-tween.js"></script>
     <script>
         var app = new Vue({
             el: '#app',

@@ -82,41 +82,53 @@ input {
 body {
   margin: 0; }
 
-@keyframes slide-to-left {
+@keyframes slideToLeft {
   from {
     transform: translateX(0); }
   to {
-    transform: translateX(100%); } }
+    transform: translateX(-100%); } }
 
-@keyframes slide-from-rgiht {
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%); }
+  to {
+    transform: translateX(0); } }
+
+@keyframes slideFromLeft {
   from {
     transform: translateX(-100%); }
   to {
     transform: translateX(0); } }
 
-@keyframes slide-from-left {
-  from {
-    transform: translateX(-100%); }
-  to {
-    transform: translateX(0); } }
-
-@keyframes slide-to-right {
+@keyframes slideToRight {
   from {
     transform: translateX(0); }
   to {
     transform: translateX(100%); } }
 
-.slide-to-right {
-  animation: 1s ease slide-to-right; }
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
-.slide-from-right {
-  animation: 1s ease slide-from-right; }
+@keyframes fadeOut {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
 
-.slide-to-left {
-  animation: 1s ease slide-to-left; }
+.slide-leave {
+  animation: slideToLeft 1s ease; }
 
-.slide-from-left {
-  animation: 1s ease slide-from-left; }
+.slide-enter {
+  animation: slideFromRight 1s ease; }
+
+.slide-leave-reverse {
+  animation: slideToRight 1s ease; }
+
+.slide-enter-reverse {
+  animation: slideFromLeft 1s ease; }
 
 .slides {
   position: relative;
@@ -124,11 +136,15 @@ body {
   .slides .slide-item {
     position: absolute;
     width: 100%;
-    transform: translateX(100%); }
-    .slides .slide-item.active {
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transform: translateX(0);
+    display: none;
+    backface-visibility: hidden; }
+    .slides .slide-item.actived {
       position: relative;
-      color: lightcoral;
-      transform: translateX(0); }
+      display: block; }
   .slides .slide-nav-left, .slides .slide-nav-right {
     position: absolute;
     height: 100%;
@@ -152,3 +168,13 @@ body {
     right: 0px; }
     .slides .slide-nav-right i {
       padding: 15px 17px 15px 13px; }
+
+.slide-item .descr {
+  margin: 0;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  color: white; }

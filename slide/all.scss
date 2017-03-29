@@ -1,4 +1,30 @@
-@keyframes slide-to-left{
+@keyframes slideToLeft{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+    }
+}
+@keyframes slideFromRight{
+    from{
+        transform: translateX(100%);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+@keyframes slideFromLeft{
+    from{
+        
+        transform: translateX(-100%);
+    }
+    to{
+        
+        transform: translateX(0);
+    }
+}
+@keyframes slideToRight{
     from{
         transform: translateX(0);
     }
@@ -6,58 +32,52 @@
         transform: translateX(100%);
     }
 }
-@keyframes slide-from-rgiht{
+@keyframes fadeIn{
     from{
-        transform: translateX(-100%);
+        opacity: 0;
     }
     to{
-        transform: translateX(0);
+        opacity:1;
     }
 }
-@keyframes slide-from-left{
+@keyframes fadeOut{
     from{
-        transform: translateX(-100%);
+       opacity: 1;
     }
     to{
-        transform: translateX(0);
-    }
-}
-@keyframes slide-to-right{
-    from{
-        transform: translateX(0);
-    }
-    to{
-        transform: translateX(100%);
+       opacity: 0;
     }
 }
 $duration:1s;
 $ease:ease;
-.slide-to-right{
-    animation: $duration $ease slide-to-right;
+.slide-leave{
+    animation: slideToLeft $duration $ease  ;
 }
-.slide-from-right{
-    animation: $duration $ease slide-from-right;
+.slide-enter{
+    animation: slideFromRight $duration $ease ;
 }
-.slide-to-left{
-    animation: $duration $ease slide-to-left;
+.slide-leave-reverse{
+    animation: slideToRight $duration $ease ;
 }
-.slide-from-left{
-    animation: $duration $ease slide-from-left;
+.slide-enter-reverse{
+    animation: slideFromLeft $duration $ease ;
 }
 .slides{
     position: relative;
     overflow: hidden;
     .slide-item{
-        &.active{
+        &.actived{
             position: relative;
-            // display: block;
-            color:lightcoral;
-            transform: translateX(0)
+            display: block;
         }
         position: absolute;
         width:100%;
-        transform: translateX(100%)
-        // display: none;
+        top:0;
+        left:0;
+        overflow: hidden;
+        transform: translateX(0);
+        display: none;
+        backface-visibility: hidden;
     }
     .slide-nav-left,.slide-nav-right{
         position: absolute;
