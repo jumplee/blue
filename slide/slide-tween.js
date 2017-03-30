@@ -1,18 +1,23 @@
 var Slide = {
     name: 'Slide',
     template: document.getElementById('slide_component').innerHTML,
-    
+
     data: function () {
         return {
-            x:0,
+            x: 0,
             actived: false
         }
     },
     methods: {
-        getStyle:function(){
+        updateTransform: function (x) {
+            this.x = x
+        }
+    },
+    computed: {
+        styles: function () {
             return {
-                'transformX': this.x+'%'
-            }    
+                'transform': 'translateX(' + this.x + '%)'
+            }
         }
     }
 }
@@ -71,29 +76,46 @@ var slidesComponent = {
                 return false
             }
             var oldView = this.childItems[oldVal]
-
-            oldView.x= 20
-
-            return false
+            var newView = this.childItems[newVal]
+            newView.$el.classList.add('actived')
+            newView.$el.style.position = 'absolute'
             var animationFrame
 
             function animate(time) {
                 TWEEN.update(time)
                 animationFrame = requestAnimationFrame(animate)
             }
-            new TWEEN.Tween({
-                    x: 0
+            var fromObj = {
+                x: 0,
+                x2: 100
+            }
+            var toObj = {
+                x: -100,
+                x2: 0
+            }
+            if(this.reverse){
+                fromObj={
+                    x:0,
+                    x2:-100
+                }
+                toObj={
+                    x:100,
+                    x2:0
+                }
+            }
+            new TWEEN.Tween(fromObj)
+                .to(toObj, 750)
+                .onUpdate(function () {
+                    oldView.x = this.x
+                    newView.x = this.x2
                 })
-                .to({
-                    x: 100
-                }, 750)
-                .onUpdate(function(){
-                    console.log(this.x)
-                    oldView.x=this.x
-                })
+                .easing(TWEEN.Easing.Cubic.InOut)
                 .onComplete(function () {
-                    console.log('animateEnd')
+                    oldView.$el.classList.remove('actived')
+                    newView.$el.style.position = ''
                     cancelAnimationFrame(animationFrame)
+                    
+                    
                 })
                 .start()
             animationFrame = requestAnimationFrame(animate)

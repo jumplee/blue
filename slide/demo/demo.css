@@ -139,7 +139,7 @@ body {
     top: 0;
     left: 0;
     overflow: hidden;
-    transform: translateX(0);
+    transform: translateX(100%);
     display: none;
     backface-visibility: hidden; }
     .slides .slide-item.actived {

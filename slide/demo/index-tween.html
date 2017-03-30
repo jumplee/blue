@@ -24,7 +24,6 @@
                 <div class="descr">
                     <h2>手工输入的一个页面</h2>
                 </div>
-            
             <img class="slide-image" src="./iphone7-gallery1.jpeg" alt="">
         </Slide>
             <Slide v-for="(slide,index) in slides">
@@ -47,7 +46,7 @@
         </div>
     </script>
     <script type="text/template" id="slide_component">
-        <div class="slide-item" :style="getStyle()" :class="[actived?'actived':'']">
+        <div class="slide-item" :style="styles" :class="[actived?'actived':'']">
             <slot></slot>
         </div>
     </script>
