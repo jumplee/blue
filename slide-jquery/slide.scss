@@ -1,0 +1,100 @@
+@import "./font/iconfont.css";
+.slides{
+    position: relative;
+    overflow: hidden;
+    .slide-item{
+        &.actived{
+            position: relative;
+            display: block;
+        }
+        position: absolute;
+        width:100%;
+        top:0;
+        left:0;
+        overflow: hidden;
+        display: none;
+       
+    }
+    .slide-nav-left,.slide-nav-right{
+        position: absolute;
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top:0;
+        width:100px;
+        i{
+             color:gray;
+             font-size:25px;
+             cursor: pointer;
+             opacity: 0;
+             transition: opacity 0.5s ease;
+             background: #fafafa;
+             border-radius: 50%;
+             padding:15px 13px 15px 17px;
+        }
+        &:hover{
+            i{
+                opacity: 1;
+            }
+        }
+    }
+    .slide-nav-right{
+        right:0px;
+        i{
+            padding:15px 17px 15px 13px;
+        }
+    }
+}
+
+.slide-image{
+    width:100%;
+}
+.slide-item{
+    .descr{
+        margin:0;
+        padding:15px;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        background: rgba(0,0,0,.2);
+        color:white;
+    }
+}
+$slide-nav-width:70px;
+$slide-nav-icon-size:40px;
+$base-zIndex:99;
+.slide-nav{
+    position: absolute;
+    height:100%;
+    padding:15px;
+    cursor: pointer;
+    width:$slide-nav-width;
+    background: black;
+    opacity: 0.2;
+    z-index: $base-zIndex;
+    &.slide-left{
+        left:0;
+        top:0;
+    }
+    &.slide-right{
+        right:0;
+        top:0;
+    }
+}
+.slide-nav-icon{
+    z-index:$base-zIndex+1;
+    position: absolute;
+    top:50%;
+    cursor: pointer;
+    margin-top:-($slide-nav-icon-size+10);
+    font-size:$slide-nav-icon-size;
+    color:white;
+    &.icon-left{
+        left:20px;
+    }
+    &.icon-right{
+        right:20px;
+    }
+}

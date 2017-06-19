@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/tween.js/r14/Tween.js"></script>
+    <style>
+        .box {
+            border: 1px dashed #333;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            box-sizing: border-box;
+            position: absolute;
+        }
+        .canvas{
+            position: relative;
+            height:400px;
+            background: #fafafa;
+        }
+        .box1{
+            top:150px;
+        }
+        .ball{
+            position: absolute;
+            top:10px;
+            left:10px;
+            width:10px;
+            height:10px;
+            border-radius: 50%;
+            background: orange;
+            z-index: 99;
+        }
+        .btn{
+            position: absolute;
+            bottom:30px;
+            left:10px;
+            z-index: 1001;
+        }
+    </style>
+</head>
+
+<body>
+<div class="ball"></div>
+<div class="canvas">
+    <div class="box box0">
+        I'm box0
+    </div>
+    <div class="box box1">
+        I'm box1
+    </div>
+</div>
+
+<button class="btn" onClick="start()">开始</button>
+<script src="../BezierHelper/helper.js"></script>
+
+<script>
+	var box0 = document.querySelector('.box0');
+	var box1 = document.querySelector('.box1');
+	var ball = document.querySelector('.ball');
+	var start_time ;
+	function start() {
+		start_time=(new Date()).getTime();
+		requestAnimationFrame(animate);
+		var coords = {
+			x: 0,
+			y: 0
+		};
+		var tween = new TWEEN.Tween(coords)
+			.to({
+				x: 1000,
+				y: 100
+			}, 1000)
+			.onUpdate(function () {
+				box0.style.left=this.x+'px';
+				console.log(this.x, this.y);
+			})
+			.easing(TWEEN.Easing.Back.In);
+		var coords2={x:0,y:0}
+		var tween1= new TWEEN.Tween(coords2)
+			.to({
+				x: 1000,
+				y: 100
+			}, 1000)
+			.onUpdate(function () {
+				box1.style.left=this.x+'px';
+				console.log(this.x, this.y);
+			})
+
+			// .repeat(10)
+			// .yoyo()
+			.easing(TWEEN.Easing.Linear.None);
+		// tween1.start();
+		var tween2= new TWEEN.Tween({t:0})
+			.to({
+				t: 1
+			}, 1000)
+			.onUpdate(function () {
+				var point=bezier3(this.t,curvePoints[0],curvePoints[1],curvePoints[2],curvePoints[3]);
+				ball.style.left=point.x+'px';
+				ball.style.top=point.y+'px';
+			})
+			.easing(TWEEN.Easing.Quadratic.Out);
+
+        tween2.start();
+//		tween.chain(tween1,tween2).start();
+	}
+
+
+	function animate(time) {
+		requestAnimationFrame(animate);
+		TWEEN.update(time);
+		if(start_time-time>30000){
+			cancelAnimationFrame(animate);
+		}
+	}
+
+	function bezier3(t,point0,point1,point2 ,point3){
+		var point={x:0,y:0};
+		var oneMinusT = 1 - t;
+		point.x = oneMinusT * oneMinusT * oneMinusT * (point0.x)
+			+ 3 * oneMinusT * oneMinusT * t * (point1.x)
+			+ 3 * oneMinusT * t * t * (point2.x)
+			+ t * t * t * (point3.x);
+
+		point.y = oneMinusT * oneMinusT * oneMinusT * (point0.y)
+			+ 3 * oneMinusT * oneMinusT * t * (point1.y)
+			+ 3 * oneMinusT * t * t * (point2.y)
+			+ t * t * t * (point3.y);
+		return point;
+	}
+	createMask();
+	var curvePoints=[
+		{x:100,y:250},{x:150,y:100},{x:350,y: 100},{x: 384,y: 695}
+    ];
+	function onMaskUpdate(points){
+		curvePoints=[
+			points.p1,points.cp1,points.cp2,points.p2
+        ];
+
+    }
+</script>
+</body>
+
+</html>
