@@ -68,12 +68,16 @@ $base-zIndex:99;
 .slide-nav{
     position: absolute;
     height:100%;
-    padding:15px;
     cursor: pointer;
     width:$slide-nav-width;
-    background: black;
-    opacity: 0.2;
     z-index: $base-zIndex;
+
+    .slide-nav-background{
+        //background: black;
+        //opacity: 0.2;
+        height:100%;
+        display: none;
+    }
     &.slide-left{
         left:0;
         top:0;
@@ -88,13 +92,41 @@ $base-zIndex:99;
     position: absolute;
     top:50%;
     cursor: pointer;
-    margin-top:-($slide-nav-icon-size+10);
+    margin-top:-$slide-nav-icon-size;
     font-size:$slide-nav-icon-size;
     color:white;
+    display: none;
     &.icon-left{
         left:20px;
     }
     &.icon-right{
         right:20px;
+    }
+}
+.slides.mouse-on{
+    .slide-nav-icon{
+        display: block;
+    }
+    .slide-nav-background{
+        display: block;
+    }
+}
+.slide-dots{
+    $color:#fff;
+    $color-hover:darken($color,70%);
+    position: absolute;
+    width: 100%;
+    bottom:15px;
+    text-align: center;
+    .icon-font{
+        display: inline;
+        color:$color;
+        cursor: pointer;
+        &:hover{
+            color:$color-hover;
+        }
+        &.active{
+            color:$color-hover;
+        }
     }
 }

@@ -6,33 +6,27 @@
     <title>Document</title>
     <link rel="stylesheet" href="slide.css">
     <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/tween.js/r14/Tween.js"></script>
 </head>
 <body>
 <div class="slides">
-    <div class="slide-item actived">
+    <div class="slide-item actived" data-id="1">
         <img class="slide-image" src="./iphone7-gallery1.jpeg" alt="">
     </div>
-    <div class="slide-item">
+    <div class="slide-item" data-id="2">
         <img class="slide-image"  src="./iphone7-gallery2.jpeg" alt="">
     </div>
-    <div class="slide-item">
+    <div class="slide-item" data-id="3">
         <img class="slide-image"  src="./iphone7-gallery3.jpeg" alt="">
     </div>
-    <div class="slide-nav slide-left">
-
-    </div>
-    <i class="slide-nav-icon icon-font icon-left"></i>
-    <div class="slide-nav slide-right">
-    </div>
-    <i class="slide-nav-icon icon-font icon-right"></i>
 </div>
+
 <script src="slider.js"></script>
 <script>
     var slide=new Slider({
     	element:'.slides',
-	    autoPlay:true,
-        animation:'fade'
+//	    autoPlay:true,
+        animation:'slide'
+
     })
 </script>
 </body>
