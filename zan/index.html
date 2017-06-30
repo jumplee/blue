@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .zan-panel{
+            text-align: center;
+            padding:100px;
+            display: none;
+        }
+        .zan-panel.on{
+            display: block;
+        }
+
+        .zan-panel .zan-icon{
+            display: block;
+            animation:shake 1s  ease-in-out;
+            margin:0 auto;
+            width: 42px;
+        }
+        .zan-panel .zan-line{
+            width:10px;
+            height:3px;
+            background: #ff7e32;
+            animation: show 1s;
+            transform-origin: 40px 0;
+            position: absolute;
+            left:50%;
+            margin-left:-38px;
+            top:120px;
+        }
+        .zan-line-1{
+            transform: rotate(50deg);
+        }
+        .zan-line-2{
+            transform: rotate(80deg);
+        }
+        .zan-line-3{
+            transform: rotate(110deg);
+        }
+        .zan-line-4{
+            transform: rotate(140deg);
+        }
+        @keyframes shake {
+            from {
+                transform: scale(.9) rotate(0deg);
+            }
+            30% {
+                transform: scale(1.2) rotate(0deg);
+            }
+            55% {
+                transform: scale(1.2) rotate(30deg);
+            }
+            75% {
+                transform: scale(1.2) rotate(-8deg);
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        @keyframes show {
+            from{
+                opacity: 0;
+            }
+            60%{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
+        }
+
+
+        .zan-btn{
+            position: fixed;
+            bottom:10px;
+        }
+    </style>
+</head>
+<body>
+<div class="zan-panel">
+    <img class="zan-icon" src="zan.png" alt="">
+    <div class="zan-line zan-line-1"></div>
+    <div class="zan-line zan-line-2"></div>
+    <div class="zan-line zan-line-3"></div>
+    <div class="zan-line zan-line-4"></div>
+</div>
+<button class="zan-btn" onclick="zan()">点赞</button>
+<script>
+    var zanPanel=document.querySelector('.zan-panel');
+    function zan() {
+	    zanPanel.classList.add('on');
+	    setTimeout(function(){
+	    	zanPanel.classList.remove('on')
+        },1300);
+    }
+</script>
+</body>
+</html>
